@@ -1,0 +1,14 @@
+[Unit]
+Description=Run autoplay script at startup
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+ExecStart=/bin/bash /home/USER/autoplay.sh
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Restart=always
+User=USER
+
+[Install]
+WantedBy=graphical.target
