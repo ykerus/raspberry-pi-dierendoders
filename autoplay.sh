@@ -14,8 +14,19 @@ while true; do
     sleep 1
 done
 
+# Wait until after `start_hour`
+start_hour=14
+while true; do
+  current_hour=$(date +%H)
+  if [[ $current_hour -ge start_hour ]]; then
+    break
+  fi
+  echo "Current time is before $start_hour:00. Waiting..."
+  sleep 60  # Check again in 1 minute
+done
+
 # Wait to next `start_minute` to turn on video
-start_minute=10  # Minutes at which video will start
+start_minute=10
 current_time=$(date +%s)
 next_start_time=$(( (current_time / (start_minute * 60) + 1) * (start_minute * 60) ))
 sleep_duration=$((next_start_time - current_time))
