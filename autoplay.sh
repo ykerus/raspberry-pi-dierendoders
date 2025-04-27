@@ -14,6 +14,14 @@ while true; do
     sleep 1
 done
 
+# Wait to next `start_minute` to turn on video
+start_minute=10  # Minutes at which video will start
+current_time=$(date +%s)
+next_start_time=$(( (current_time / (start_minute * 60) + 1) * (start_minute * 60) ))
+sleep_duration=$((next_start_time - current_time))
+echo "sleep_duration=$sleep_duration"
+sleep $sleep_duration
+
 # Start video on loop in fullscreen
 cvlc \
     --loop \
